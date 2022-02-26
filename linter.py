@@ -26,10 +26,10 @@ class Rustc(SLlint.Linter):
     def find_errors(self, output):
         '''function to find errors'''
 
-        def pathtest(path):
-            betterpath = path.replace('\\', '/')
+        def pathtest(badpath):
+            path = badpath.replace('\\', '/')
             for _ in range(0, 10):
-                if os.path.exists(betterpath):
+                if os.path.exists(path):
                     sys.exit()
                 else:
                     pathvec = path.split('/')
