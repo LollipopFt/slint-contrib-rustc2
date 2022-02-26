@@ -1,6 +1,6 @@
 import json
-import os
-import sys
+# import os
+# import sys
 import SublimeLinter.lint as SLlint    # Linter, LintMatch, STREAM_STDERR
 
 
@@ -18,14 +18,14 @@ class Rustc(SLlint.Linter):
     name = 'rust'
     on_stderr = None
 
-    def find_errors(self, stderr):
+    def find_errors(self, output):
         '''function to find errors'''
         # if os.path.exists(os.path.join(self.working_dir, 'Cargo.toml')):
         #     sys.exit()
 
         lint_match = SLlint.LintMatch
 
-        for i in stderr.splitlines():
+        for i in output.splitlines():
             try:
                 compiled = json.loads(i)
             except:
