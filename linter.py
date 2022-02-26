@@ -15,7 +15,7 @@ class Rustc(SLlint.Linter):
     'selector': 'source.rust'
   }
   error_stream = SLlint.STREAM_STDERR
-  name = 'rustc'
+  name = 'rust'
   on_stderr = None
 
   def find_errors(self, output):
