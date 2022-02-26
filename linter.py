@@ -29,11 +29,14 @@ class Rustc(SLlint.Linter):
         def pathtest(badpath):
             print(badpath)
             pathvec_init = badpath.replace('\\', '/').split('/').pop()
-            path = '/'.join(pathvec_init) + 'Cargo.toml'
+            path = '/'.join(pathvec_init) + '/Cargo.toml'
+            print(path)
             for _ in range(0, 10):
                 if os.path.exists(path):
+                    print(path)
                     sys.exit()
                 else:
+                    print(path)
                     pathvec = path.split('/')
                     if len(pathvec) >= 3:
                         pathvec.pop(-2)
