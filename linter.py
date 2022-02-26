@@ -125,7 +125,7 @@ class Rustc(SLlint.Linter):
                         code = ''
                     else:
                         code = child['code']['code']
-                    level = child['warning']
+                    level = child['level']
                     spans = child['spans']
                     for spans in child['spans']:
                         msg = mainmessage
