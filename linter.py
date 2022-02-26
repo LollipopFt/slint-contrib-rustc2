@@ -9,22 +9,24 @@ class Rustc(SLlint.Linter):
 
     cmd = (
         'rustc', '--error-format=json', '--emit=mir', '-o', '/dev/null',
-        '${file}'
+        '${temp_file}'
     )
     defaults = {
         'selector': 'source.rust'
     }
     error_stream = SLlint.STREAM_STDERR
     name = 'rust'
+    on_stderr = None
+    tempfile_suffix = 'rs'
 
-    def find_errors(self, output):
+    def find_errors(self, stderr):
         '''function to find errors'''
         if os.path.exists(os.path.join(self.working_dir, 'Cargo.toml')):
             sys.exit()
 
         lint_match = SLlint.LintMatch
 
-        for i in output.splitlines():
+        for i in stderr.splitlines():
             try:
                 compiled = json.loads(i)
             except:
