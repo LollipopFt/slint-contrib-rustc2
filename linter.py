@@ -41,7 +41,7 @@ class Rustc(SLlint.Linter):
                     else:
                         break
 
-        path = self.get.context('file_path')
+        path = self.context.get('file')
         pathtest(path)
 
         def for_loop(spans_list, mainmessage, level, code, lint_match):
