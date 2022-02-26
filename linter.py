@@ -9,7 +9,7 @@ class Rustc(SLlint.Linter):
 
     cmd = (
         'rustc', '--error-format=json', '--emit=mir', '-o', '/dev/null',
-        '${temp_file}'
+        '${file}'
     )
     defaults = {
         'selector': 'source.rust'
@@ -17,7 +17,7 @@ class Rustc(SLlint.Linter):
     error_stream = SLlint.STREAM_STDERR
     name = 'rust'
     on_stderr = None
-    tempfile_suffix = 'rs'
+    tempfile_suffix = '-'
 
     def init(self):
         '''placeholder'''
@@ -27,7 +27,9 @@ class Rustc(SLlint.Linter):
         '''function to find errors'''
 
         def pathtest(badpath):
-            path = badpath.replace('\\', '/')
+            print(badpath)
+            pathvec_init = badpath.replace('\\', '/').split('/').pop()
+            path = '/'.join(pathvec_init) + 'Cargo.toml'
             for _ in range(0, 10):
                 if os.path.exists(path):
                     sys.exit()
@@ -39,7 +41,7 @@ class Rustc(SLlint.Linter):
                     else:
                         break
 
-        path = os.path.abspath('Cargo.toml')
+        path = self.get.context('file_path')
         pathtest(path)
 
         def for_loop(spans_list, mainmessage, level, code, lint_match):
@@ -140,4 +142,3 @@ class Rustc(SLlint.Linter):
                     yield from for_loop(
                         spans, mainmessage, level, code, lint_match
                     )
-        print(self)
