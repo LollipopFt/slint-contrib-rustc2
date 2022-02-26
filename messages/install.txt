@@ -1,0 +1,6 @@
+SublimeLinter-contrib-rustc
+-------------------------------
+This linter plugin for SublimeLinter provides an interface to rustc.
+
+For more information, please see:
+https://github.com/LollipopFt/slint-contrib-rustc2
