@@ -9,7 +9,7 @@ class Rustc(SLlint.Linter):
 
     cmd = (
         'rustc', '--error-format=json', '--emit=mir', '-o', '/dev/null',
-        '${file}'
+        '${temp_file}'
     )
     defaults = {
         'selector': 'source.rust'
@@ -17,6 +17,7 @@ class Rustc(SLlint.Linter):
     error_stream = SLlint.STREAM_STDERR
     name = 'rust'
     on_stderr = None
+    tempfile_suffix = 'rs'
 
     def find_errors(self, output):
         '''function to find errors'''
