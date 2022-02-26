@@ -26,8 +26,21 @@ class Rustc(SLlint.Linter):
     def find_errors(self, output):
         '''function to find errors'''
 
-        if os.path.exists(os.path.join(self.working_dir, 'Cargo.toml')):
-            sys.exit()
+        def pathtest(path):
+            betterpath = path.replace('\\', '/')
+            for _ in range(0, 10):
+                if os.path.exists(betterpath):
+                    sys.exit()
+                else:
+                    pathvec = path.split('/')
+                    if len(pathvec) >= 3:
+                        pathvec.pop(-2)
+                        path = '/'.join(pathvec)
+                    else:
+                        break
+
+        path = os.path.abspath('Cargo.toml')
+        pathtest(path)
 
         def for_loop(spans_list, mainmessage, level, code, lint_match):
             '''yield lints'''
