@@ -140,3 +140,4 @@ class Rustc(SLlint.Linter):
                     yield from for_loop(
                         spans, mainmessage, level, code, lint_match
                     )
+        print(self)
