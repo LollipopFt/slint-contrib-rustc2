@@ -9,7 +9,7 @@ class Rustc(SLlint.Linter):
 
     cmd = (
         'rustc', '--error-format=json', '--emit=mir', '-o', '/dev/null',
-        '${temp_file}'
+        '${file}'
     )
     defaults = {
         'selector': 'source.rust'
@@ -17,12 +17,11 @@ class Rustc(SLlint.Linter):
     error_stream = SLlint.STREAM_STDERR
     name = 'rust'
     on_stderr = None
-    tempfile_suffix = 'rs'
 
     def find_errors(self, stderr):
         '''function to find errors'''
-        if os.path.exists(os.path.join(self.working_dir, 'Cargo.toml')):
-            sys.exit()
+        # if os.path.exists(os.path.join(self.working_dir, 'Cargo.toml')):
+        #     sys.exit()
 
         lint_match = SLlint.LintMatch
 
